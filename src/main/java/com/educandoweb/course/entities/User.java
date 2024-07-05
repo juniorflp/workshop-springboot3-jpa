@@ -1,15 +1,21 @@
 package com.educandoweb.course.entities;
 
 
+import java.io.Serial;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 
 @Entity
-@Table(name="tb_user")
+@Table(name = "tb_user")
 public class User implements Serializable {
+    @Serial
+    private static final long serialVersionUID = 1L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -18,7 +24,12 @@ public class User implements Serializable {
     private String email;
     private String password;
 
-    public User (){
+    @JsonIgnore
+    @OneToMany(mappedBy = "client")
+    private final List<Order> orders = new ArrayList<>();
+
+
+    public User() {
     }
 
     public User(Long id, String name, String email, String password) {
@@ -59,6 +70,11 @@ public class User implements Serializable {
     public void setPassword(String password) {
         this.password = password;
     }
+
+    public List<Order> getOrders() {
+        return orders;
+    }
+
 
     @Override
     public boolean equals(Object o) {
