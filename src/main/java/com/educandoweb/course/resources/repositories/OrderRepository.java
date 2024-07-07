@@ -1,4 +1,4 @@
-package com.educandoweb.course.repositories;
+package com.educandoweb.course.resources.repositories;
 
 import com.educandoweb.course.entities.Order;
 import org.springframework.data.jpa.repository.JpaRepository;
